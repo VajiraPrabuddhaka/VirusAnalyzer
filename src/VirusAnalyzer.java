@@ -15,10 +15,15 @@ class VirusAnalyzer {
     int count = 0;
     int size = 0;
     int[] occur;
+
+    // arraylist for containing definitions loaded from definitions.txt
+    // hashmaps inside array list will use for storing virus definitions data
     ArrayList<HashMap> al=new ArrayList<HashMap>();
+
+    //Arraylist for containing the details related to viruses
     ArrayList<virus> viruses = new ArrayList<virus>();
 
-    void readPattern(String filename) throws Exception {
+    void readPattern(String filename) throws Exception {  //read the definitions.txt and train for identifying viruses
         try
         {
             FileReader in = new FileReader(filename);
@@ -67,9 +72,11 @@ class VirusAnalyzer {
     }
 
     void updateDefinitions(){
-
+        // definitions update will be done manually
     }
 
+
+    // method for display the report on identified virus v
     void genReport(virus v){
         System.out.println("Selected file is infected with a virus!");
         System.out.println("=====================Details about malware=====================");
@@ -80,6 +87,7 @@ class VirusAnalyzer {
         System.out.println("Effectiveness :"+v.getEffectiveness());
     }
 
+    //method for scan the given file
     void searchVirus(String file) throws Exception {
         FileReader in = new FileReader(file);
         BufferedReader br = new BufferedReader(in);
@@ -105,7 +113,7 @@ class VirusAnalyzer {
         for (int i=0;i<al.size();i++){
             if (occur[i]==al.get(i).size()) {
                 genReport(viruses.get(i));
-                return;
+                return; //return when virus detected otherwise method will continue and will display no infected
             }
         }
 

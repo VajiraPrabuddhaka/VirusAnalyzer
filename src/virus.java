@@ -3,6 +3,11 @@ import java.util.Date;
 /**
  * Created by vajira on 5/13/17.
  */
+
+//this is used for storing the data structure of virus for generating report
+//It is possible to add more data about virus structure
+
+
 public class virus {
     private String name;
     private String type;
