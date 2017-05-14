@@ -104,7 +104,6 @@ class VirusAnalyzer {
 
         for (int i=0;i<al.size();i++){
             if (occur[i]==al.get(i).size()) {
-                //JOptionPane.showMessageDialog(null, "Error", "Virus Detected ", JOptionPane.ERROR_MESSAGE);
                 genReport(viruses.get(i));
                 return;
             }
@@ -112,12 +111,7 @@ class VirusAnalyzer {
 
         System.out.println("File has not infected viruses!");
 
-        /*if (size == occur) {
-            JOptionPane.showMessageDialog(null, "Error", "Virus Detected ", JOptionPane.ERROR_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Clean File", "No Virus Found ", JOptionPane.INFORMATION_MESSAGE);
-        }*/
+
     }
     public static void main(String []nix) {
 
