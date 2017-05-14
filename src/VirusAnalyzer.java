@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Set;
 import javax.swing.*;
 
@@ -31,14 +32,13 @@ class VirusAnalyzer {
             HashMap hashMap;
             virus myVirus;
             while ((line = br.readLine()) != null) {
-                //hashMap.put(line.substring(0, line.indexOf("/")), line.substring(line.indexOf("/") + 1, line.length()));
 
                 def = line.substring(0,line.indexOf("?"));
 
                 detail = line.substring(line.indexOf("?")+1,line.length());
 
                 detailList = detail.split("&");
-                System.out.println(detailList.length);
+
                 hashMap = new HashMap();
                 myVirus = new virus();
                 defs = def.split(" ");
@@ -50,13 +50,14 @@ class VirusAnalyzer {
                 myVirus.setName(detailList[0]);
                 myVirus.setType(detailList[1]);
                 myVirus.setCorporation(detailList[2]);
+                myVirus.setEffectiveness(detailList[3]);
 
                 viruses.add(myVirus);
                 al.add(hashMap);
 
-                //++i;
+
             }
-            //size = i;
+
             br.close();
         }
         catch(Exception e)
@@ -71,9 +72,12 @@ class VirusAnalyzer {
 
     void genReport(virus v){
         System.out.println("Selected file is infected with a virus!");
+        System.out.println("=====================Details about malware=====================");
+        System.out.println("===============================================================");
         System.out.println("Name : "+v.getName());
         System.out.println("Type : "+v.getType());
         System.out.println("Created by : "+v.getCorporation());
+        System.out.println("Effectiveness :"+v.getEffectiveness());
     }
 
     void searchVirus(String file) throws Exception {
@@ -96,15 +100,17 @@ class VirusAnalyzer {
             }
         }
         br.close();
-        //System.out.println(al.size());
+
 
         for (int i=0;i<al.size();i++){
             if (occur[i]==al.get(i).size()) {
-                JOptionPane.showMessageDialog(null, "Error", "Virus Detected ", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Error", "Virus Detected ", JOptionPane.ERROR_MESSAGE);
                 genReport(viruses.get(i));
                 return;
             }
         }
+
+        System.out.println("File has not infected viruses!");
 
         /*if (size == occur) {
             JOptionPane.showMessageDialog(null, "Error", "Virus Detected ", JOptionPane.ERROR_MESSAGE);
@@ -114,44 +120,15 @@ class VirusAnalyzer {
         }*/
     }
     public static void main(String []nix) {
-        /*try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 
-                if ("Nimbus".equals(info.getName())) {
 
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception ex) {
-        }*/
-        /*try {
-            VirusAnalyzer fr = new VirusAnalyzer();
-            fr.readPattern("definitions.txt");
-            fr.searchVirus("virus.exe");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-/*
-
-        FileReader in = null;
-        String l = null;
-        try {
-            in = new FileReader("virus.exe");
-            BufferedReader br = new BufferedReader(in);
-            while ((l = br.readLine()) != null){
-                System.out.println(l);
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-*/      VirusAnalyzer fr = new VirusAnalyzer();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter file path or name to be scanned : ");
+        String filename = scanner.next();
+        VirusAnalyzer fr = new VirusAnalyzer();
         try {
             fr.readPattern("definitions.txt");
-            fr.searchVirus("virus.exe");
+            fr.searchVirus(filename);
         } catch (Exception e) {
             e.printStackTrace();
         }

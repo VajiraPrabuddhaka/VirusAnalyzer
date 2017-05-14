@@ -7,9 +7,19 @@ public class virus {
     private String name;
     private String type;
     private String corporation;
+    private String effectiveness;
 
+
+    public String getEffectiveness() {
+        return effectiveness;
+    }
+
+    public void setEffectiveness(String effectiveness) {
+        this.effectiveness = effectiveness;
+    }
 
     public String getName() {
+
         return name;
     }
 
